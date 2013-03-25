@@ -3,5 +3,4 @@
 $:.push File.expand_path("../../lib", "__FILE__")
 require 'chefenv'
 
-10.times { puts "HI" }
 ChefEnv::Tasks.start
