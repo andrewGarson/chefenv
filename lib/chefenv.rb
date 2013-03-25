@@ -1,4 +1,5 @@
 require 'thor'
+require 'fileutils'
 require "chefenv/version"
 
 module ChefEnv
@@ -10,6 +11,9 @@ module ChefEnv
       current = current_environment
       available_environments.each do |env|
         puts "#{(env == current_environment) ? '*' : ' '} #{env}"
+      end
+      if available_environments.size == 0
+        puts "No Environments Available"
       end
     end
 
@@ -27,6 +31,7 @@ module ChefEnv
 
     desc "init", "initialize the environment"
     def init()
+      FileUtils.mkdir_p(File.expand_path("~/chef")) unless File.exists?("~/chef")
       current = current_environment
 
       if current.nil?
@@ -68,7 +73,7 @@ module ChefEnv
         begin
           File.read(File.expand_path("~/chef/current")).chomp
         rescue Errno::ENOENT
-          nil
+          nil  
         end
       end
     end
