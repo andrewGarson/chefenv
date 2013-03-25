@@ -1,6 +1,6 @@
 # Chefenv
 
-TODO: Write a gem description
+Manages multiple chef server/organization environments
 
 ## Installation
 
@@ -18,7 +18,31 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Execute:
+
+    $ chefenv init
+
+This will ensure that you have a ~/chef directory.
+
+Create a directory under ~/chef for each of your environments.
+Put your knife.rb, .pem and any other files you need for that organization
+under that folder. For example, for my hosted chef organization, I create
+~/chef/hosted and put my knife.rb and .pem files in there. Additionally, this is
+a reasonable place to put secret key files.
+
+Once you have at least one folder created under ~/chef, you can
+
+    $ chefenv list
+
+or
+
+    $ chefenv use ENVNAME
+
+## Future Work
+
+1. Allow using a different directory than ~/chef
+1. Read the ~/.chef symlink to get the current env instead of using ~/chef/current file
+1. Add tasks for creating/destroying organizations
 
 ## Contributing
 
@@ -27,3 +51,7 @@ TODO: Write usage instructions here
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## Author
+
+Author:: Andrew Garson (<andrew.garson@gmail.com>)
