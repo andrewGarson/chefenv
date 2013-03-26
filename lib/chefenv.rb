@@ -4,7 +4,7 @@ require "chefenv/version"
 require 'pathname'
 
 module ChefEnv
-  # Your code goes here...
+  CHEFENV_DIR = File.expand_path("~/.chefenv")
   class Tasks < Thor
 
     desc "list", "list the available chef environments"
@@ -37,7 +37,8 @@ module ChefEnv
 
     desc "init", "initialize the environment"
     def init()
-      FileUtils.mkdir_p(File.expand_path("~/chef")) unless File.exists?("~/chef")
+      FileUtils.mkdir_p(CHEFENV_DIR) unless File.directory(CHEFENV_DIR)
+      FileUtils.mkdir_p(File.join(CHEFENV_DIR, "environments"))
       current = current_environment
 
       if current.nil?
@@ -57,7 +58,7 @@ module ChefEnv
       unless available_environments.include?(current)
         puts "'#{current}' is selected as the current environment, but it is not valid. Please select a different environment"
         `rm -f ~/.chef`
-        `rm -f ~/chef/current`
+        `rm -f #{CHEFENV_DIR}/current`
         list
         return
       end
@@ -66,11 +67,11 @@ module ChefEnv
 
     no_tasks do
       def available_environments
-        Pathname.new(File.expand_path("~/chef")).children.select { |c| c.directory? }.map { |d| d.basename.to_s }
+        Pathname.new(File.expand_path(CHEFENV_DIR)).children.select { |c| c.directory? }.map { |d| d.basename.to_s }
       end
 
       def select_environment(env)
-        File.write(File.expand_path("~/chef/current"), env)
+        File.write(File.expand_path("#{CHEFENV_DIR}/current"), env)
         `rm -f ~/.chef`
         `ln -s ~/chef/#{env} ~/.chef`
       end
