@@ -29,6 +29,11 @@ module ChefEnv
       end
     end
 
+    desc "current", "display the name of the current environment"
+    def current()
+      puts current_environment
+    end
+
     desc "init", "initialize the environment"
     def init()
       FileUtils.mkdir_p(File.expand_path("~/chef")) unless File.exists?("~/chef")
