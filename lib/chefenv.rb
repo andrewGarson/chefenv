@@ -1,6 +1,7 @@
 require 'thor'
 require 'fileutils'
 require "chefenv/version"
+require 'pathname'
 
 module ChefEnv
   # Your code goes here...
