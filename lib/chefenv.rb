@@ -36,25 +36,7 @@ module ChefEnv
     def init()
       FileUtils.mkdir_p(chefenv_dir) unless File.directory?(chefenv_dir)
       FileUtils.mkdir_p(environments_dir) unless File.directory?(environments_dir)
-
-      current = current_environment
-      if current.nil?
-        puts 'No environment selected. Picking the first one that I find. You can change it with `chefenv use ENV`'
-        available = available_environments
-        if available.empty?
-          puts "No environments are available"
-        else
-          puts "Trying to use '#{available.first}'"
-          use(available.first)
-        end
-        current = current_environment
-      end
-
-      unless available_environments.include?(current)
-        puts "'#{current}' is selected as the current environment, but it is not valid. Please select a different environment"
-        FileUtils.safe_unlink(chef_dir)
-      end
-
+      FileUtils.safe_unlink(chef_dir)
       list
     end
 
@@ -65,7 +47,9 @@ module ChefEnv
       end
 
       def chefenv_dir
-        File.expand_path("~/.chefenv")
+        dir = ENV['CHEFENV_DIR'].to_s 
+        dir = File.expand_path("~/.chefenv") if dir.empty?
+        dir
       end
 
       def environments_dir
