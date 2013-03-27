@@ -41,7 +41,6 @@ or
 ## Future Work
 
 1. Allow using a different directory than ~/chef
-1. Read the ~/.chef symlink to get the current env instead of using ~/chef/current file
 1. Add tasks for creating/destroying organizations
 
 ## Contributing
