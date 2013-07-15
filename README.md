@@ -2,6 +2,7 @@
 
 Manages multiple chef server/organization environments
 
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -18,30 +19,30 @@ Or install it yourself as:
 
 ## Usage
 
+Environments are stored under CHEFENV_DIR/environments.
+You can set the CHEFENV_DIR environment variable if you like. The default value is ~/.chefenv
+
 Execute:
+
+WARNING: If you have data stored under ~/.chef the init command will DELETE it!
 
     $ chefenv init
 
-This will ensure that you have a ~/chef directory.
+This will setup CHEFENV_DIR/environments and clear the current environment.
 
-Create a directory under ~/chef for each of your environments.
+Create a directory under CHEFENV_DIR/environments for each of your environments.
 Put your knife.rb, .pem and any other files you need for that organization
 under that folder. For example, for my hosted chef organization, I create
 ~/chef/hosted and put my knife.rb and .pem files in there. Additionally, this is
 a reasonable place to put secret key files.
 
-Once you have at least one folder created under ~/chef, you can
+Once you have at least one environment folder you can
 
     $ chefenv list
-
-or
-
     $ chefenv use ENVNAME
 
 ## Future Work
 
-1. Allow using a different directory than ~/chef
-1. Read the ~/.chef symlink to get the current env instead of using ~/chef/current file
 1. Add tasks for creating/destroying organizations
 
 ## Contributing
