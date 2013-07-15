@@ -22,6 +22,9 @@ Or install it yourself as:
 Environments are stored under CHEFENV_DIR/environments.
 You can set the CHEFENV_DIR environment variable if you like. The default value is ~/.chefenv
 
+Upgrade Note: This is different from version 0.1.0 - You should move your environment folders from
+~/chef to ~/.chefenv
+
 Execute:
 
 WARNING: If you have data stored under ~/.chef the init command will DELETE it!
