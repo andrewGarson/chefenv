@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = Chefenv::VERSION
   gem.authors       = ["Andrew Garson"]
   gem.email         = ["andrew.garson@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{Manage your current Chef server endpoint}
+  gem.summary       = gem.description
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)
